@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Intents</string>
+    <string name="introduccion">App que muestra datos personal previamente introducidos</string>
+    <string name="domicilio">DOMICILIO</string>
+    <string name="principales">PRINCIPALES</string>
+    <string name="title_activity_principales">Datos Principales</string>
+</resources>
