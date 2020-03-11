@@ -13,7 +13,7 @@ public class Post {
     public Post(String titulo, String descripcion, String imagen) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.imagen = imagen;
+        this.setImagen(imagen);
     }
 
     public String getTitulo() {
@@ -38,6 +38,7 @@ public class Post {
 
 
     public void setImagen(String imagen) {
-        this.imagen = imagen;
+        // Se agrega una s para formar "https", ya que las imagenes son "http"
+        this.imagen = imagen.substring(0,4) + "s" + imagen.substring(4);
     }
 }

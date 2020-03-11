@@ -100,8 +100,8 @@ public class PostAdapter extends ArrayAdapter {
 
         // Petición para obtener la imagen
 
-//        ImageRequest request = new ImageRequest(item.getImagen(),
-        ImageRequest request = new ImageRequest("http://mla-s1-p.mlstatic.com/611884-MLA31115582295_062019-I.jpg",
+        //        ImageRequest request = new ImageRequest("https://mla-s1-p.mlstatic.com/611884-MLA31115582295_062019-I.jpg",
+        ImageRequest request = new ImageRequest(item.getImagen(),
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {
@@ -133,7 +133,7 @@ public class PostAdapter extends ArrayAdapter {
 
             for(int i=0; i<jsonArray.length(); i++){
                 try {
-                    JSONObject objeto= jsonArray.getJSONObject(0);
+                    JSONObject objeto= jsonArray.getJSONObject(i);
 
                     Post post = new Post(
                             objeto.getString("title"),
