@@ -33,10 +33,8 @@ public class PostAdapter extends ArrayAdapter {
     // Atributos
     private RequestQueue requestQueue;
     JsonObjectRequest jsArrayRequest;
-//    private static final String URL_BASE = "http://servidorexterno.site90.com/datos";
-    private static final String URL_BASE = "https://api.mercadolibre.com/items";
-//    private static final String URL_JSON = "/social_media.json";
-    private static final String URL_JSON = "/MLA722542881";
+    private static final String URL_BASE = "https://api.mercadolibre.com/sites/MLA";
+    private static final String URL_JSON = "/search?q=pelota&offset=20";
     private static final String TAG = "PostAdapter";
     List<Post> items;
 
@@ -62,7 +60,6 @@ public class PostAdapter extends ArrayAdapter {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
-
                     }
                 }
         );
@@ -89,7 +86,6 @@ public class PostAdapter extends ArrayAdapter {
                 parent,
                 false) : convertView;
 
-
         // Obtener el item actual
         Post item = items.get(position);
 
@@ -104,8 +100,8 @@ public class PostAdapter extends ArrayAdapter {
 
         // Petición para obtener la imagen
 
-
-        ImageRequest request = new ImageRequest(URL_BASE + item.getImagen(),
+//        ImageRequest request = new ImageRequest(item.getImagen(),
+        ImageRequest request = new ImageRequest("http://mla-s1-p.mlstatic.com/611884-MLA31115582295_062019-I.jpg",
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {
@@ -132,23 +128,23 @@ public class PostAdapter extends ArrayAdapter {
 
         try {
             // Obtener el array del objeto
-            jsonArray = jsonObject.getJSONArray("pictures");
+//            jsonArray = jsonObject.getJSONArray("pictures");
+            jsonArray = jsonObject.getJSONArray("results");
 
-//            for(int i=0; i<jsonArray.length(); i++){
-//                try {
+            for(int i=0; i<jsonArray.length(); i++){
+                try {
                     JSONObject objeto= jsonArray.getJSONObject(0);
 
                     Post post = new Post(
-                            jsonObject.getString("title"),
-                            jsonObject.getString("base_price"),
-//                            jsonObject.getString("pictures"));
-                            objeto.getString("secure_url"));
+                            objeto.getString("title"),
+                            objeto.getString("price"),
+                            objeto.getString("thumbnail"));
 
                     posts.add(post);
-//                } catch (JSONException e) {
-//                    Log.e(TAG, "Error de parsing: "+ e.getMessage());
-//                }
-//            }
+                } catch (JSONException e) {
+                    Log.e(TAG, "Error de parsing: "+ e.getMessage());
+                }
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
