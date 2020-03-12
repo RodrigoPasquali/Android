@@ -5,8 +5,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.ArticleListActivity"
+    tools:context=".View.MainActivity"
     android:orientation="vertical">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/btnSearch"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_search_black_24dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            />
+
+        <EditText
+            android:id="@+id/edSearch"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="BUSCAR..."
+            android:textAlignment="center"
+            android:paddingTop="10dp"/>
+
+    </LinearLayout>
+
 <!--
     <TextView
         android:id="@+id/tvText"

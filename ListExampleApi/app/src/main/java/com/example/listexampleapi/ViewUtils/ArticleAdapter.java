@@ -17,7 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.listexampleapi.Model.Post;
+import com.example.listexampleapi.Model.Article;
 import com.example.listexampleapi.R;
 
 
@@ -29,25 +29,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PostAdapter extends ArrayAdapter {
+public class ArticleAdapter extends ArrayAdapter {
     // Atributos
     private RequestQueue requestQueue;
     JsonObjectRequest jsArrayRequest;
     private static final String URL_BASE = "https://api.mercadolibre.com/sites/MLA";
-    private static final String URL_JSON = "/search?q=camiseta";
-    private static final String TAG = "PostAdapter";
-    List<Post> items;
+    private static final String URL_JSON = "/search?q=";
+    private String articleSearched = "dragon";
+    private static final String TAG = "ArticleAdapter";
+    List<Article> items;
 
-    public PostAdapter(Context context) {
+    public ArticleAdapter(Context context) {
         super(context,0);
 
         // Crear nueva cola de peticiones
         requestQueue= Volley.newRequestQueue(context);
+    }
 
+    public void searchArticle(String article) {
         // Nueva petición JSONObject
         jsArrayRequest = new JsonObjectRequest(
                 Request.Method.GET,
-                URL_BASE + URL_JSON,
+                URL_BASE + URL_JSON + article,
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -74,7 +77,7 @@ public class PostAdapter extends ArrayAdapter {
     }
 
     @Override
-    public Post getItem(int position)
+    public Article getItem(int position)
     {
         return items.get(position);
     }
@@ -93,7 +96,7 @@ public class PostAdapter extends ArrayAdapter {
                 false) : convertView;
 
         // Obtener el item actual
-        Post item = items.get(position);
+        Article item = items.get(position);
 
         // Obtener Views
         TextView textoTitulo = (TextView) listItemView.findViewById(R.id.textoTitulo);
@@ -127,9 +130,18 @@ public class PostAdapter extends ArrayAdapter {
         return listItemView;
     }
 
-    public List<Post> parseJson(JSONObject jsonObject){
+    public void setArticleSearched(String article) {
+        this.articleSearched = article;
+    }
+
+    public String getArticleaSearched() {
+        return this.articleSearched;
+    }
+
+
+    public List<Article> parseJson(JSONObject jsonObject){
         // Variables locales
-        List<Post> posts = new ArrayList();
+        List<Article> articles = new ArrayList();
         JSONArray jsonArray= null;
 
         try {
@@ -141,12 +153,12 @@ public class PostAdapter extends ArrayAdapter {
                 try {
                     JSONObject objeto= jsonArray.getJSONObject(i);
 
-                    Post post = new Post(
+                    Article article = new Article(
                             objeto.getString("title"),
                             objeto.getString("price"),
                             objeto.getString("thumbnail"));
 
-                    posts.add(post);
+                    articles.add(article);
                 } catch (JSONException e) {
                     Log.e(TAG, "Error de parsing: "+ e.getMessage());
                 }
@@ -156,6 +168,6 @@ public class PostAdapter extends ArrayAdapter {
             e.printStackTrace();
         }
 
-        return posts;
+        return articles;
     }
 }

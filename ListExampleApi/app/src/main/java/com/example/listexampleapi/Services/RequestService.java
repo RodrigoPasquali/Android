@@ -2,13 +2,7 @@ package com.example.listexampleapi.Services;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,8 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.listexampleapi.Model.Post;
-import com.example.listexampleapi.R;
+import com.example.listexampleapi.Model.Article;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,12 +22,12 @@ import java.util.List;
 
 public class RequestService {
     private RequestQueue requestQueue;
-    private List<Post> items;
+    private List<Article> items;
     private Context context;
     JsonObjectRequest jsArrayRequest;
     private static final String URL_BASE = "https://api.mercadolibre.com/sites/MLA";
     private static final String URL_JSON = "/search?q=camiseta";
-    private static final String TAG = "PostAdapter";
+    private static final String TAG = "ArticleAdapter";
 
     public RequestService(Context context) {
         context = context;
@@ -77,9 +70,9 @@ public class RequestService {
         requestQueue.add(request);
     }
 
-    public List<Post> parseJson(JSONObject jsonObject){
+    public List<Article> parseJson(JSONObject jsonObject){
         // Variables locales
-        List<Post> posts = new ArrayList();
+        List<Article> articles = new ArrayList();
         JSONArray jsonArray= null;
 
         try {
@@ -92,12 +85,12 @@ public class RequestService {
                     JSONObject objeto = jsonArray.getJSONObject(i);
                     String a = objeto.toString();
 
-                    Post post = new Post(
+                    Article article = new Article(
                             objeto.getString("title"),
                             objeto.getString("price"),
                             objeto.getString("thumbnail"));
 
-                    posts.add(post);
+                    articles.add(article);
                 } catch (JSONException e) {
                     Log.e(TAG, "Error de parsing: "+ e.getMessage());
                 }
@@ -107,6 +100,6 @@ public class RequestService {
             e.printStackTrace();
         }
 
-        return posts;
+        return articles;
     }
 }

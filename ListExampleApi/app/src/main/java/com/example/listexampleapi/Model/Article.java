@@ -1,21 +1,21 @@
 package com.example.listexampleapi.Model;
 
 //ITEM
-public class Post {
+public class Article {
     private String title;
     private String price;
     private String image;
 
-    public Post() {
+    public Article() {
     }
 
-    public Post(String title, String price, String image) {
+    public Article(String title, String price, String image) {
         this.title = title;
         this.price = price;
         this.setImage(image);
     }
 
-    public Post(String title, String price) {
+    public Article(String title, String price) {
         this.title = title;
         this.price = price;
 //        this.setImage(image);
