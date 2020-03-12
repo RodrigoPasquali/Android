@@ -2,26 +2,18 @@ package com.example.listexampleapi.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.listexampleapi.Model.Post;
 import com.example.listexampleapi.R;
 import com.example.listexampleapi.ViewUtils.PostAdapter;
 
 public class ArticleListActivity extends AppCompatActivity {
-    // Atributos
     private ListView listView;
     private ArrayAdapter adapter;
 
@@ -29,16 +21,34 @@ public class ArticleListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        setContentView(R.layout.post);
 
         // Obtener instancia de la lista
-        listView= (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
 
         // Crear y setear adaptador
+        initListView();
+
+        onItemTouch();
+    }
+
+    private void initListView(){
         adapter = new PostAdapter(this);
         listView.setAdapter(adapter);
     }
 
+    private void onItemTouch(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Post listItem = (Post) adapter.getItem(position);
+                Intent intent = new Intent(ArticleListActivity.this, ArticleActivity.class);
+                intent.putExtra("title", listItem.getTitle());
+                intent.putExtra("price", listItem.getPrice());
+                intent.putExtra("image", listItem.getImage());
+                startActivity(intent);
+            }
+        });
+    }
 /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

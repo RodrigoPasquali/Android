@@ -2,43 +2,52 @@ package com.example.listexampleapi.Model;
 
 //ITEM
 public class Post {
-    // Atributos
-    private String titulo;
-    private String descripcion;
-    private String imagen;
+    private String title;
+    private String price;
+    private String image;
 
     public Post() {
     }
 
-    public Post(String titulo, String descripcion, String imagen) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.setImagen(imagen);
+    public Post(String title, String price, String image) {
+        this.title = title;
+        this.price = price;
+        this.setImage(image);
     }
 
-    public String getTitulo() {
-        return titulo;
+    public Post(String title, String price) {
+        this.title = title;
+        this.price = price;
+//        this.setImage(image);
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public String getPrice() {
+        return price;
     }
 
-    public String getImagen() {
-        return imagen;
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getImage() {
+        return image;
     }
 
 
-    public void setImagen(String imagen) {
+    public void setImage(String image) {
         // Se agrega una s para formar "https", ya que las imagenes son "http"
-        this.imagen = imagen.substring(0,4) + "s" + imagen.substring(4);
+        if(!(image.substring(4,5).equals("s"))){
+            this.image = image.substring(0,4) + "s" + image.substring(4);
+        }else{
+            this.image = image;
+        }
     }
 }

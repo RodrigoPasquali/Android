@@ -34,7 +34,7 @@ public class PostAdapter extends ArrayAdapter {
     private RequestQueue requestQueue;
     JsonObjectRequest jsArrayRequest;
     private static final String URL_BASE = "https://api.mercadolibre.com/sites/MLA";
-    private static final String URL_JSON = "/search?q=pelota&offset=20";
+    private static final String URL_JSON = "/search?q=camiseta";
     private static final String TAG = "PostAdapter";
     List<Post> items;
 
@@ -74,6 +74,12 @@ public class PostAdapter extends ArrayAdapter {
     }
 
     @Override
+    public Post getItem(int position)
+    {
+        return items.get(position);
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
@@ -95,13 +101,13 @@ public class PostAdapter extends ArrayAdapter {
         final ImageView imagenPost = (ImageView) listItemView.findViewById(R.id.imagenPost);
 
         // Actualizar los Views
-        textoTitulo.setText(item.getTitulo());
-        textoDescripcion.setText(item.getDescripcion());
+        textoTitulo.setText(item.getTitle());
+        textoDescripcion.setText(item.getPrice());
 
         // Petición para obtener la imagen
 
         //        ImageRequest request = new ImageRequest("https://mla-s1-p.mlstatic.com/611884-MLA31115582295_062019-I.jpg",
-        ImageRequest request = new ImageRequest(item.getImagen(),
+        ImageRequest request = new ImageRequest(item.getImage(),
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {
