@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         onItemTouch();
 
-        onButtonSearchTouch();
+        onSearchTouch();
     }
 
     private void getLayoutViews() {
@@ -61,7 +61,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onButtonSearchTouch(){
+    public void onSearchTouch(){
+        edSearch.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                boolean boolReturn = false;
+                String article = edSearch.getText().toString();
+
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if(keyCode == KeyEvent.KEYCODE_ENTER){
+                        adapter.searchArticle(article);
+                        boolReturn = true;
+                    }
+                }
+                return boolReturn;
+            }
+        });
+
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
