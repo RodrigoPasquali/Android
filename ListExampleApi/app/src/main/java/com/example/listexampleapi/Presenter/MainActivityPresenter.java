@@ -1,8 +1,10 @@
 package com.example.listexampleapi.Presenter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.example.listexampleapi.Model.Article;
+import com.example.listexampleapi.Services.ImageVolleyCallback;
 import com.example.listexampleapi.Services.Parse.ListArticleParse;
 import com.example.listexampleapi.Services.RequestService;
 import com.example.listexampleapi.Services.ListVolleyCallback;
@@ -30,6 +32,10 @@ public class MainActivityPresenter {
 
                 final List<Article> articles = listArticleParse.parseObject(result);
 
+                for(int i = 0; i < articles.size(); i++){
+                    getImage(articles.get(i));
+                }
+
                 adapter.setItems(articles);
             }
 
@@ -40,20 +46,17 @@ public class MainActivityPresenter {
         });
     }
 
-//    private void getImage(final Article article){
-//        this.requestService.getImage(article ,article.getUrlImage(), new ImageVolleyCallback() {
-//            @Override
-//            public void onImageSuccess(Bitmap bitmap) {
-//                article.setImage(bitmap);
-//                String a = "s";
-//            }
-//
-//            @Override
-//            public void onImageFail() {
-//                String a = "s";
-////                Bitmap bitmap = new Bitmap();
-////                article.setImage(R.drawable.error);
-//            }
-//        });
-//    }
+    private void getImage(final Article article){
+        this.requestService.getImage(article ,article.getUrlImage(), new ImageVolleyCallback() {
+            @Override
+            public void onImageSuccess(Bitmap bitmap) {
+                article.setImage(bitmap);
+            }
+
+            @Override
+            public void onImageFail() {
+
+            }
+        });
+    }
 }
