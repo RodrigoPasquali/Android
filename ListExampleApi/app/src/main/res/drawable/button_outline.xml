@@ -6,13 +6,13 @@
 
     <!-- Color de fondo de la vista -->
     <solid
-        android:color="@color/white" >
+        android:color="@color/colorPrimary" >
     </solid>
 
     <!-- Color y ancho del borde del elemento -->
     <stroke
         android:width="3dp"
-        android:color="@color/white" >
+        android:color="@color/colorPrimary" >
     </stroke>
 
     <!-- Si queremos añadir algún padding -->

@@ -46,8 +46,8 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     private void getViewLayouts(){
-        tvTitle = findViewById(R.id.title);
-        tvPrice = findViewById(R.id.price);
+        tvTitle = findViewById(R.id.tvTitle);
+        tvPrice = findViewById(R.id.tvPrice);
         image = findViewById(R.id.imageArticle);
     }
 

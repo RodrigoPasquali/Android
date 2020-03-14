@@ -54,7 +54,7 @@ public class ArticleAdapter extends ArrayAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
         View listItemView;
-        listItemView = (null == convertView ) ? layoutInflater.inflate(R.layout.article_item, parent, false) : convertView;
+        listItemView = (null == convertView ) ? layoutInflater.inflate(R.layout.item_article, parent, false) : convertView;
 
         final Article item = items.get(position);
 

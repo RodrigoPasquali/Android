@@ -51,6 +51,5 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/gray"
             android:layout_gravity="bottom"/>
-
     </LinearLayout>
 </RelativeLayout>
