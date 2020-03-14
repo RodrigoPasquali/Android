@@ -1,24 +1,32 @@
 package com.example.listexampleapi.Model;
 
-//ITEM
+import android.graphics.Bitmap;
+
 public class Article {
     private String title;
     private String price;
-    private String image;
+    private String imageUrl;
+    private String id;
+    private Bitmap image;
 
-    public Article() {
+    public Article(String id) {
+        this.id = id;
+        this.image = null;
     }
 
-    public Article(String title, String price, String image) {
+    public Article(String id, String title, String price, String imageUrl) {
+        this.id = id;
         this.title = title;
         this.price = price;
-        this.setImage(image);
+        this.setUrlImage(imageUrl);
     }
 
-    public Article(String title, String price) {
-        this.title = title;
-        this.price = price;
-//        this.setImage(image);
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -37,17 +45,25 @@ public class Article {
         this.price = price;
     }
 
-    public String getImage() {
-        return image;
+    public String getUrlImage() {
+        return imageUrl;
     }
 
 
-    public void setImage(String image) {
+    public void setUrlImage(String image) {
         // Se agrega una s para formar "https", ya que las imagenes son "http"
         if(!(image.substring(4,5).equals("s"))){
-            this.image = image.substring(0,4) + "s" + image.substring(4);
+            this.imageUrl = image.substring(0,4) + "s" + image.substring(4);
         }else{
-            this.image = image;
+            this.imageUrl = image;
         }
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public Bitmap getImage() {
+        return this.image;
     }
 }

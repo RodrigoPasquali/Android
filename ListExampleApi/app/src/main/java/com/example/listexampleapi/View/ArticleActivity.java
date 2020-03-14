@@ -39,10 +39,10 @@ public class ArticleActivity extends AppCompatActivity {
         String stringPrice = extras.getString("price");
         String stringImage = extras.getString("image");
 
-        item = new Article();
+        item = new Article("id");
         item.setTitle(stringTitle);
         item.setPrice(stringPrice);
-        item.setImage(stringImage);
+        item.setUrlImage(stringImage);
     }
 
     private void getViewLayouts(){
@@ -55,7 +55,7 @@ public class ArticleActivity extends AppCompatActivity {
         tvTitle.setText(item.getTitle());
         tvPrice.setText(item.getPrice());
 
-        ImageRequest request = new ImageRequest(item.getImage(),
+        ImageRequest request = new ImageRequest(item.getUrlImage(),
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {

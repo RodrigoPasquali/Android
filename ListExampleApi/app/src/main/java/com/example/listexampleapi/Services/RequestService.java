@@ -13,93 +13,96 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.listexampleapi.Model.Article;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RequestService {
+    private static RequestService instance;
     private RequestQueue requestQueue;
-    private List<Article> items;
     private Context context;
-    JsonObjectRequest jsArrayRequest;
-    private static final String URL_BASE = "https://api.mercadolibre.com/sites/MLA";
-    private static final String URL_JSON = "/search?q=camiseta";
-    private static final String TAG = "ArticleAdapter";
+    private JsonObjectRequest jsArrayRequest;
+    private static final String URL_ARTICLE = "/items/";
+    private static final String TAG = "RequestService";
+    private static final String URL_BASE = "https://api.mercadolibre.com";
+    private static final String URL_JSON = "/sites/MLA/search?q=";
 
-    public RequestService(Context context) {
-        context = context;
+    private RequestService(Context context) {
+        this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);
-
-    // esto lo tendria que hacer cuando clickeen el boton buscar
-        getRequest();
-
-        // Añadir petición a la cola
-        requestQueue.add(jsArrayRequest);
     }
 
-//    DEBERIA TENER UN PARAMETRO CON LA PALABRA A BUSCAR
-//    DEBERIA DEVOLVER EL STRING CON EL JSON
-    public void getRequest(){
-        // Nueva petición JSONObject
-        jsArrayRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                URL_BASE + URL_JSON,
-                null,
+    public static synchronized RequestService getInstance(Context context) {
+        if (instance == null) {
+            instance = new RequestService(context);
+        }
+        return instance;
+    }
+
+    public void getSearchArticles(String article, final ListVolleyCallback callback){
+        jsArrayRequest = new JsonObjectRequest(Request.Method.GET, URL_BASE + URL_JSON + article, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        items = parseJson(response);
-//                        notifyDataSetChanged();
+                        try {
+                            callback.onSuccess(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        String err = null;
+                        if (error instanceof com.android.volley.NoConnectionError){
+                            err = "No internet Access!";
+                        }
+                        try {
+                            if(err != "null") {
+                                callback.onError(err);
+                            }
+                            else {
+                                callback.onError(error.toString());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
                     }
                 }
         );
+
+        requestQueue.add(jsArrayRequest);
     }
 
-    public void getImage(String imageUrl, Response.Listener<Bitmap> listener, Response.ErrorListener errorListener) {
-        ImageRequest request = new ImageRequest(imageUrl, listener, 0, 0, null,null, errorListener);
-        // Añadir petición a la cola
-        requestQueue.add(request);
+    public void getArticle(String id){
+
     }
 
-    public List<Article> parseJson(JSONObject jsonObject){
-        // Variables locales
-        List<Article> articles = new ArrayList();
-        JSONArray jsonArray= null;
+    public void getDescription(){
 
-        try {
-            // Obtener el array del objeto
-//            jsonArray = jsonObject.getJSONArray("pictures");
-            jsonArray = jsonObject.getJSONArray("results");
+    }
 
-            for(int i = 0; i < jsonArray.length(); i++){
-                try {
-                    JSONObject objeto = jsonArray.getJSONObject(i);
-                    String a = objeto.toString();
+    public void getImage(final Article article, String imageUrl, final ImageVolleyCallback imageVolleyCallback) {
+        ImageRequest request = new ImageRequest(imageUrl,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap bitmap) {
+//                        article.setImage(bitmap);
+                        imageVolleyCallback.onImageSuccess(bitmap);
 
-                    Article article = new Article(
-                            objeto.getString("title"),
-                            objeto.getString("price"),
-                            objeto.getString("thumbnail"));
-
-                    articles.add(article);
-                } catch (JSONException e) {
-                    Log.e(TAG, "Error de parsing: "+ e.getMessage());
+                        // imagenPost.setImageBitmap(bitmap);
+                    }
+                }, 0, 0, null,null,
+                new Response.ErrorListener() {
+                    public void onErrorResponse(VolleyError error) {
+                        imageVolleyCallback.onImageFail();
+//                        imagenPost.setImageResource(R.drawable.error);
+                        Log.d(TAG, "Error en respuesta Bitmap: "+ error.getMessage());
+                    }
                 }
-            }
+        );
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return articles;
+        requestQueue.add(request);
     }
 }
