@@ -8,6 +8,12 @@ public class Article {
     private String imageUrl;
     private String id;
     private Bitmap image;
+    private String condition;
+    private String brand;
+    private String model;
+    private String quantityAvailable;
+    private String quantitySold;
+    private String linkToPublication;
 
     public Article(String id) {
         this.id = id;
@@ -65,5 +71,13 @@ public class Article {
 
     public Bitmap getImage() {
         return this.image;
+    }
+
+    public void setLinkToPublication(String link) {
+        this.linkToPublication = link;
+    }
+
+    public String getLinkToPublication(){
+        return this.linkToPublication;
     }
 }

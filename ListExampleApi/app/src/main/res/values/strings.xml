@@ -2,4 +2,5 @@
     <string name="app_name">ListExampleApi</string>
     <string name="please_enter_article_searched">Por favor introducir articulo a buscar</string>
     <string name="searcher">Buscando:</string>
+    <string name="search">BUSCAR...</string>
 </resources>
