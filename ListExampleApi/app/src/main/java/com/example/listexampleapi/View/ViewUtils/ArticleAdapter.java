@@ -54,16 +54,16 @@ public class ArticleAdapter extends ArrayAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
         View listItemView;
-        listItemView = (null == convertView ) ? layoutInflater.inflate(R.layout.post, parent, false) : convertView;
+        listItemView = (null == convertView ) ? layoutInflater.inflate(R.layout.article_item, parent, false) : convertView;
 
         final Article item = items.get(position);
 
-        TextView textoTitulo = (TextView) listItemView.findViewById(R.id.textoTitulo);
-        TextView textoDescripcion = (TextView) listItemView.findViewById(R.id.textoDescripcion);
-        final ImageView imageArticle = (ImageView) listItemView.findViewById(R.id.imagenPost);
+        TextView tvTitle = listItemView.findViewById(R.id.tvTitle);
+        TextView tvPrice = listItemView.findViewById(R.id.tvPrice);
+        final ImageView imageArticle =  listItemView.findViewById(R.id.ivImage);
 
-        textoTitulo.setText(item.getTitle());
-        textoDescripcion.setText(item.getPrice());
+        tvTitle.setText(item.getTitle());
+        tvPrice.setText(item.getPrice());
 
         ImageRequest request = new ImageRequest(item.getUrlImage(),
                 new Response.Listener<Bitmap>() {

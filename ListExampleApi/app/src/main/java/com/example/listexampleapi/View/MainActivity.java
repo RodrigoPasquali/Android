@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getLayoutViews() {
-        listView = (ListView) findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
         edSearch = findViewById(R.id.edSearch);
         btnSearch = findViewById(R.id.btnSearch);
     }
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(article.equals("")) {
             Toast.makeText(MainActivity.this,
-                    "Por favor introducir articulo a buscar",
+                    getResources().getString(R.string.please_enter_article_searched),
                     Toast.LENGTH_LONG).show();
         } else {
             mainActivityPresenter.getArticleList(article, adapter);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             listView.setAdapter(adapter);
 
             Toast.makeText(MainActivity.this,
-                    "Buscando: " + edSearch.getText(),
+                    getResources().getString(R.string.searcher) + edSearch.getText(),
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Article listItem = (Article) adapter.getItem(position);
+                Article listItem = adapter.getItem(position);
                 Intent intent = new Intent(MainActivity.this, ArticleActivity.class);
                 intent.putExtra("title", listItem.getTitle());
                 intent.putExtra("price", listItem.getPrice());
