@@ -42,6 +42,12 @@ public class ArticlePresenter implements ArticlePresenterInterface {
                     getImage(article);
                 }
 
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 showResult(article);
             }
 
