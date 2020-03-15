@@ -75,8 +75,41 @@ public class RequestService {
         requestQueue.add(jsArrayRequest);
     }
 
-    public void getArticle(String id){
+    public void getArticle(String id, final ListVolleyCallback callback){
+        jsArrayRequest = new JsonObjectRequest(Request.Method.GET, URL_BASE + URL_ARTICLE + id, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            callback.onSuccess(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String err = null;
+                        if (error instanceof com.android.volley.NoConnectionError){
+                            err = "No internet Access!";
+                        }
+                        try {
+                            if(err != "null") {
+                                callback.onError(err);
+                            }
+                            else {
+                                callback.onError(error.toString());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
+                    }
+                }
+        );
 
+        requestQueue.add(jsArrayRequest);
     }
 
     public void getDescription(){

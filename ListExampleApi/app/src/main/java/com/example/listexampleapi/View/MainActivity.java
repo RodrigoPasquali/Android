@@ -2,6 +2,8 @@ package com.example.listexampleapi.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         getLayoutViews();
 
+        initButtonPressureEffect();
+
         adapter = new ArticleAdapter(this);
 
         this.mainActivityPresenter = new MainActivityPresenter(getApplicationContext());
@@ -39,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         onItemTouch();
 
         onSearchActionTouch();
+    }
+
+    private void initButtonPressureEffect() {
+
+
     }
 
     private void getLayoutViews() {
