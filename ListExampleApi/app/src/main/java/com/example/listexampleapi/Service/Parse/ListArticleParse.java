@@ -22,7 +22,6 @@ public class ListArticleParse {
         JSONArray jsonArray = null;
 
         try {
-//            jsonArray = jsonObject.getJSONArray("pictures");
             jsonArray = jsonObject.getJSONArray("results");
 
             for(int i=0; i<jsonArray.length(); i++){
@@ -47,7 +46,6 @@ public class ListArticleParse {
 
         return articles;
     }
-
 
     public Article parseArticle(JSONObject jsonObject, Article article) throws JSONException {
         JSONArray jsonArray = null;
@@ -84,36 +82,24 @@ public class ListArticleParse {
             article.setLinkToPublication(jsonObject.getString("permalink"));
         }
 
+        try {
+            jsonArray = jsonObject.getJSONArray("pictures");
+
+//            for(int i = 0; i < jsonArray.length(); i++){
+            for(int i = 0; i < 1; i++){
+                try {
+                    JSONObject objeto = jsonArray.getJSONObject(i);
+
+                    article.setUrlImage(objeto.getString("secure_url"));
+                } catch (JSONException e) {
+                    Log.e(TAG, "Error de parsing: "+ e.getMessage());
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return article;
-
-//        try {
-//            jsonArray = jsonObject.getJSONArray("pictures");
-//            jsonArray = jsonObject.getJSONArray("results");
-
-//            for(int i=0; i<jsonArray.length(); i++){
-//                try {
-//                    JSONObject objeto = jsonArray.getJSONObject(i);
-
-
-
-//        article.setCondition();
-//        article.setBrand();
-//        article.setModel();
-//        article.setAvailableQuantity();
-//        article.setSoldQuantity();
-//        article.setLinkToPublication();
-//        article.setImageUrl();
-//        article.setImage();
-
-
-
-//                } catch (JSONException e) {
-//                    Log.e(TAG, "Error de parsing: "+ e.getMessage());
-//                }
-//            }
-
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
     }
 }

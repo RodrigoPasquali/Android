@@ -22,11 +22,11 @@ public class Article {
         this.itemImage = null;
     }
 
-    public Article(String id, String title, String price, String itemImageUrl) {
+    public Article(String id, String title, String price, String urlItemImage) {
         this.id = id;
         this.title = title;
         this.price = price;
-        this.setUrlImage(itemImageUrl);
+        this.setUrlItemImage(urlItemImage);
     }
 
     public String getId() {
@@ -53,43 +53,12 @@ public class Article {
         this.price = price;
     }
 
-    public String getUrlImage() {
-        return this.itemImageUrl;
-    }
-
-
-    public void setUrlImage(String image) {
-        // Se agrega una s para formar "https", ya que las imagenes son "http"
-        if(!(image.substring(4,5).equals("s"))){
-            this.itemImageUrl = image.substring(0,4) + "s" + image.substring(4);
-        }else{
-            this.itemImageUrl = image;
-        }
-    }
-
-    public void setItemImage(Bitmap itemImage) {
-        this.itemImage = itemImage;
-    }
-
-    public Bitmap getItemImage() {
-        return this.itemImage;
-    }
-
     public void setLinkToPublication(String link) {
         this.linkToPublication = link;
     }
 
     public String getLinkToPublication(){
         return this.linkToPublication;
-    }
-
-
-    public String getItemImageUrl() {
-        return this.itemImageUrl;
-    }
-
-    public void setItemImageUrl(String itemImageUrl) {
-        this.itemImageUrl = itemImageUrl;
     }
 
     public String getCondition() {
@@ -132,12 +101,28 @@ public class Article {
         this.soldQuantity = soldQuantity;
     }
 
-    public String getImageUrl() {
+    public String getUrlImage() {
         return this.imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setUrlImage(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getUrlItemImage() {
+        return this.itemImageUrl;
+    }
+
+    public void setUrlItemImage(String itemImageUrl) {
+        this.itemImageUrl = checkUrl(itemImageUrl);
+    }
+
+    public void setItemImage(Bitmap itemImage) {
+        this.itemImage = itemImage;
+    }
+
+    public Bitmap getItemImage() {
+        return this.itemImage;
     }
 
     public Bitmap getImage() {
@@ -147,5 +132,12 @@ public class Article {
     public void setImage(Bitmap image) {
         this.image = image;
     }
+    private String checkUrl(String url){
+        // Se agrega una s para formar "https", ya que las imagenes son "http"
+        if(!(url.substring(4,5).equals("s"))){
+            url = url.substring(0,4) + "s" + url.substring(4);
+        }
 
+        return url;
+    }
 }

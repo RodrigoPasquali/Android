@@ -2,16 +2,11 @@ package com.example.listexampleapi.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.listexampleapi.Model.Article;
 import com.example.listexampleapi.Presenter.ArticlePresenter;
 import com.example.listexampleapi.R;
@@ -65,20 +60,12 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
         this.tvSoldQuantity.setText(pArticle.getSoldQuantity());
 //        this.tvSellerAddress.setText(pArticle.);
 
-        ImageRequest request = new ImageRequest(pArticle.getUrlImage(),
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap bitmap) {
-                        image.setImageBitmap(bitmap);
-                    }
-                }, 0, 0, null,null,
-                new Response.ErrorListener() {
-                    public void onErrorResponse(VolleyError error) {
-                        image.setImageResource(R.drawable.error);
-                    }
-                });
-        RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(request);
+        if(pArticle.getImage() == null){
+            image.setImageBitmap(BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                    R.drawable.error));
+        } else {
+            image.setImageBitmap(pArticle.getImage());
+        }
     }
 
     @Override

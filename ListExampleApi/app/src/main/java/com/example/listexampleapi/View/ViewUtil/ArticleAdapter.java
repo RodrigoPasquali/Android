@@ -50,14 +50,14 @@ public class ArticleAdapter extends ArrayAdapter implements ArticleListView {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
-        View listItemView;
-        listItemView = (null == convertView ) ? layoutInflater.inflate(R.layout.item_article, parent, false) : convertView;
+        View itemlistView;
+        itemlistView = (null == convertView ) ? layoutInflater.inflate(R.layout.item_article, parent, false) : convertView;
 
         final Article item = items.get(position);
 
-        TextView tvTitle = listItemView.findViewById(R.id.tvTitle);
-        TextView tvPrice = listItemView.findViewById(R.id.tvPrice);
-        final ImageView imageArticle =  listItemView.findViewById(R.id.ivImage);
+        TextView tvTitle = itemlistView.findViewById(R.id.tvTitle);
+        TextView tvPrice = itemlistView.findViewById(R.id.tvPrice);
+        final ImageView imageArticle =  itemlistView.findViewById(R.id.ivImage);
 
         tvTitle.setText(item.getTitle());
         tvPrice.setText(item.getPrice());
@@ -69,7 +69,7 @@ public class ArticleAdapter extends ArrayAdapter implements ArticleListView {
             imageArticle.setImageBitmap(item.getItemImage());
         }
 
-        return listItemView;
+        return itemlistView;
     }
 
     @Override

@@ -1,9 +1,11 @@
 package com.example.listexampleapi.Presenter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.example.listexampleapi.Model.Article;
 import com.example.listexampleapi.Presenter.Interface.ArticlePresenterInterface;
+import com.example.listexampleapi.Service.ImageVolleyCallback;
 import com.example.listexampleapi.Service.JsonVolleyCallback;
 import com.example.listexampleapi.Service.Parse.ListArticleParse;
 import com.example.listexampleapi.Service.RequestService;
@@ -25,35 +27,17 @@ public class ArticlePresenter implements ArticlePresenterInterface {
         this.requestService = RequestService.getInstance(context);
         this.listArticleParse = new ListArticleParse();
         this.view = view;
-//        this.article = new Article();
     }
-
-
-
-//    public void getArticleData(final Article pArticle){
-//        this.requestService.getArticle(pArticle.getId(), new JsonVolleyCallback() {
-//            @Override
-//            public void onSuccess(JSONObject result) throws JSONException {
-//                listArticleParse.parseArticle(result, pArticle);
-//            }
-//
-//            @Override
-//            public void onError(String result) throws Exception {
-//
-//            }
-//        });
-//    }
-
 
     public void getArticleData(final String idArticle){
         this.requestService.getArticle(idArticle, new JsonVolleyCallback() {
             @Override
             public void onSuccess(JSONObject result) throws JSONException {
-//                listArticleParse.parseArticle(result, pArticle);
                 article = new Article(idArticle);
                 listArticleParse.parseArticle(result, article);
 
-//                article.articleChange();
+                getImage(article);
+
                 showResult(article);
             }
 
@@ -64,13 +48,20 @@ public class ArticlePresenter implements ArticlePresenterInterface {
         });
     }
 
+    private void getImage(final Article article){
+        this.requestService.getImage(article.getUrlImage(), new ImageVolleyCallback() {
+            @Override
+            public void onImageSuccess(Bitmap bitmap) {
+                article.setImage(bitmap);
+                showResult(article);
+            }
 
+            @Override
+            public void onImageFail() {
 
-
-
-//    private void setArticleData(){
-////        this.context.
-//    }
+            }
+        });
+    }
 
     @Override
     public void showResult(Article article) {

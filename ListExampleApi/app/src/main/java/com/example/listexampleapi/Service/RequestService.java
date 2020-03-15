@@ -112,7 +112,7 @@ public class RequestService {
         this.requestQueue.add(jsArrayRequest);
     }
 
-    public void getImage(final Article article, String imageUrl, final ImageVolleyCallback imageVolleyCallback) {
+    public void getImage(String imageUrl, final ImageVolleyCallback imageVolleyCallback) {
         ImageRequest request = new ImageRequest(imageUrl,
                 new Response.Listener<Bitmap>() {
                     @Override
