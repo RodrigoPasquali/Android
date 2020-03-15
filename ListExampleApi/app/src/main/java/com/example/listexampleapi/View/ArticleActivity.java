@@ -13,15 +13,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.listexampleapi.Model.Article;
-import com.example.listexampleapi.Presenter.ArticleActivityPresenter;
+import com.example.listexampleapi.Presenter.ArticlePresenter;
 import com.example.listexampleapi.R;
+import com.example.listexampleapi.View.Interface.ArticleView;
 
-public class ArticleActivity extends AppCompatActivity {
-    private Article article;
-    private ArticleActivityPresenter articleActivityPresenter;
+public class ArticleActivity extends AppCompatActivity implements ArticleView {
+    private ArticlePresenter presenter;
     private TextView tvTitle;
     private TextView tvPrice;
     private TextView tvCondition;
+    private TextView tvAvailableQuantity;
+    private TextView tvSoldQuantity;
+//    private TextView tvSellerAddress;
     private ImageView image;
 
     @Override
@@ -29,46 +32,40 @@ public class ArticleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
 
-        this.articleActivityPresenter = new ArticleActivityPresenter(this);
+        this.presenter = new ArticlePresenter(getApplicationContext(), this);
+
         getViewLayouts();
 
-        getPostItem();
-
-        setDataView();
+        getArticleSelected();
     }
 
-    private void getPostItem(){
+    private void getArticleSelected(){
         Bundle extras = getIntent().getExtras();
         String articleId = extras.getString("id");
-        String stringTitle = extras.getString("title");
-        String stringPrice = extras.getString("price");
-        String stringImage = extras.getString("image");
-        String stringCondition = extras.getString("condition");
 
-        this.article = new Article(articleId);
-//        article.setTitle(stringTitle);
-//        article.setPrice(stringPrice);
-//        article.setUrlImage(stringImage);
-//        article.setCondition(stringCondition);
-
-        this.articleActivityPresenter.getArticleData(this.article);
-
-        String s = "s";
+        this.presenter.getArticleData(articleId);
     }
 
     private void getViewLayouts(){
         this.tvTitle = findViewById(R.id.tvTitle);
         this.tvPrice = findViewById(R.id.tvPrice);
-        this. tvCondition = findViewById(R.id.tvCondition);
+        this.tvCondition = findViewById(R.id.tvCondition);
         this.image = findViewById(R.id.imageArticle);
+        this.tvAvailableQuantity = findViewById(R.id.tvAvailableQuantity);
+        this.tvSoldQuantity = findViewById(R.id.tvSoldQuantity);
+//        this.tvSellerAddress = findViewById(R.id.tvSellerAddress);
     }
 
-    private void setDataView(){
-        this.tvTitle.setText(this.article.getTitle());
-        this.tvPrice.setText(this.article.getPrice());
-        this.tvCondition.setText(this.article.getCondition());
+    @Override
+    public void showResult(Article pArticle) {
+        this.tvTitle.setText(pArticle.getTitle());
+        this.tvPrice.setText(pArticle.getPrice());
+        this.tvCondition.setText(pArticle.getCondition());
+        this.tvAvailableQuantity.setText(pArticle.getAvailableQuantity());
+        this.tvSoldQuantity.setText(pArticle.getSoldQuantity());
+//        this.tvSellerAddress.setText(pArticle.);
 
-        ImageRequest request = new ImageRequest(this.article.getUrlImage(),
+        ImageRequest request = new ImageRequest(pArticle.getUrlImage(),
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {
@@ -82,6 +79,10 @@ public class ArticleActivity extends AppCompatActivity {
                 });
         RequestQueue requestQueue= Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(request);
+    }
+
+    @Override
+    public void invalidOperation() {
 
     }
 }

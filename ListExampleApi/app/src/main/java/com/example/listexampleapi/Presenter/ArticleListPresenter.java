@@ -54,20 +54,20 @@ public class ArticleListPresenter implements ArticleListPresenterInterface {
         });
     }
 
-    public void getArticleData(final Article article){
-        this.requestService.getArticle(article.getId(), new JsonVolleyCallback() {
-            @Override
-            public void onSuccess(JSONObject result) throws JSONException {
-                Article article1 =listArticleParse.parseArticle(result, article);
-            }
-
-            @Override
-            public void onError(String result) throws Exception {
-
-            }
-        });
-
-    }
+//    public void getArticleData(final Article article){
+//        this.requestService.getArticle(article.getId(), new JsonVolleyCallback() {
+//            @Override
+//            public void onSuccess(JSONObject result) throws JSONException {
+//                Article article1 =listArticleParse.parseArticle(result, article);
+//            }
+//
+//            @Override
+//            public void onError(String result) throws Exception {
+//
+//            }
+//        });
+//
+//    }
 
     private void getImage(final Article article){
         this.requestService.getImage(article ,article.getUrlImage(), new ImageVolleyCallback() {

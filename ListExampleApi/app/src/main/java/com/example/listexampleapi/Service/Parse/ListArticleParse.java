@@ -52,6 +52,14 @@ public class ListArticleParse {
     public Article parseArticle(JSONObject jsonObject, Article article) throws JSONException {
         JSONArray jsonArray = null;
 
+        if (jsonObject.has("title")) {
+            article.setTitle(jsonObject.getString("title"));
+        }
+
+        if (jsonObject.has("price")) {
+            article.setPrice(jsonObject.getString("price"));
+        }
+
         if (jsonObject.has("condition")) {
             article.setCondition(jsonObject.getString("condition"));
         }

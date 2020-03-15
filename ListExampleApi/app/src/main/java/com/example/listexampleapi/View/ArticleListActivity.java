@@ -98,10 +98,10 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
 //                articleListPresenter.getArticleData(item);
                 Intent intent = new Intent(ArticleListActivity.this, ArticleActivity.class);
                 intent.putExtra("id", item.getId());
-                intent.putExtra("title", item.getTitle());
-                intent.putExtra("price", item.getPrice());
-                intent.putExtra("image", item.getUrlImage());
-                intent.putExtra("condition", item.getCondition());
+//                intent.putExtra("title", item.getTitle());
+//                intent.putExtra("price", item.getPrice());
+//                intent.putExtra("image", item.getUrlImage());
+//                intent.putExtra("condition", item.getCondition());
                 startActivity(intent);
             }
         });

@@ -38,8 +38,8 @@ public class RequestService {
         return instance;
     }
 
-    public void getSearchArticles(String article, final JsonVolleyCallback callback){
-        this.jsArrayRequest = new JsonObjectRequest(Request.Method.GET, URL_BASE + URL_JSON + article, null,
+    public void getSearchArticles(String articleId, final JsonVolleyCallback callback){
+        this.jsArrayRequest = new JsonObjectRequest(Request.Method.GET, URL_BASE + URL_JSON + articleId, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -75,8 +75,8 @@ public class RequestService {
         this.requestQueue.add(jsArrayRequest);
     }
 
-    public void getArticle(String id, final JsonVolleyCallback callback){
-        this.jsArrayRequest = new JsonObjectRequest(Request.Method.GET, URL_BASE + URL_ARTICLE + id, null,
+    public void getArticle(String articleId, final JsonVolleyCallback callback){
+        this.jsArrayRequest = new JsonObjectRequest(Request.Method.GET, URL_BASE + URL_ARTICLE + articleId, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
