@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,9 +12,12 @@ import com.example.listexampleapi.Model.Article;
 import com.example.listexampleapi.Presenter.ArticlePresenter;
 import com.example.listexampleapi.R;
 import com.example.listexampleapi.View.Interface.ArticleView;
+import com.example.listexampleapi.View.ViewUtil.ImageViewRisizer;
 
 public class ArticleActivity extends AppCompatActivity implements ArticleView {
     private ArticlePresenter presenter;
+    private ImageViewRisizer imageViewRisizer;
+
     private TextView tvTitle;
     private TextView tvPrice;
     private TextView tvCondition;
@@ -28,6 +32,7 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
         setContentView(R.layout.activity_article);
 
         this.presenter = new ArticlePresenter(getApplicationContext(), this);
+        this.imageViewRisizer = new ImageViewRisizer(getApplicationContext());
 
         getViewLayouts();
 
@@ -49,6 +54,12 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
         this.tvAvailableQuantity = findViewById(R.id.tvAvailableQuantity);
         this.tvSoldQuantity = findViewById(R.id.tvSoldQuantity);
 //        this.tvSellerAddress = findViewById(R.id.tvSellerAddress);
+    }
+
+    private int getWidthDisplaySizes(){
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        return metrics.widthPixels;
     }
 
     @Override
@@ -80,6 +91,9 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
                     R.drawable.error));
         } else {
             image.setImageBitmap(pArticle.getImage());
+
+            int width = getWidthDisplaySizes();
+            this.imageViewRisizer.scaleImage(image, width);
         }
     }
 
