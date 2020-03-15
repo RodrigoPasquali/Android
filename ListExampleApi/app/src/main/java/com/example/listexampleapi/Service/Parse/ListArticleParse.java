@@ -96,6 +96,22 @@ public class ListArticleParse {
                 }
             }
 
+            List<String> urlImages = new ArrayList<>();
+
+            for(int i = 0; i < jsonArray.length(); i++){
+                try {
+                    JSONObject objeto = jsonArray.getJSONObject(i);
+
+                    urlImages.add(objeto.getString("secure_url"));
+
+//                    article.setUrlImage(objeto.getString("secure_url"));
+                } catch (JSONException e) {
+                    Log.e(TAG, "Error de parsing: "+ e.getMessage());
+                }
+            }
+
+            article.setUrlImages(urlImages);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

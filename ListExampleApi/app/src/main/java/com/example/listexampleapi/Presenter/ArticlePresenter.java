@@ -34,7 +34,13 @@ public class ArticlePresenter implements ArticlePresenterInterface {
                 article = new Article(idArticle);
                 listArticleParse.parseArticle(result, article);
 
-                getImage(article);
+//                getImage(article);
+
+//                getImages(article);
+
+                for(int i = 0; i < article.getUrlImages().size(); i++) {
+                    getImage(article);
+                }
 
                 showResult(article);
             }
@@ -50,8 +56,9 @@ public class ArticlePresenter implements ArticlePresenterInterface {
         this.requestService.getImage(article.getUrlImage(), new ImageVolleyCallback() {
             @Override
             public void onImageSuccess(Bitmap bitmap) {
-                article.setImage(bitmap);
-                showResult(article);
+//                article.setImage(bitmap);
+                article.addImage(bitmap);
+//                showResult(article);
             }
 
             @Override
@@ -59,6 +66,26 @@ public class ArticlePresenter implements ArticlePresenterInterface {
 
             }
         });
+    }
+
+    private void getImages(final Article article){
+        String url = null;
+
+        for(int i = 0; i < article.getUrlImages().size(); i++) {
+            url = article.getUrlImages().get(i);
+//        }
+            this.requestService.getImage(url, new ImageVolleyCallback() {
+                @Override
+                public void onImageSuccess(Bitmap bitmap) {
+                    article.addImage(bitmap);
+                }
+
+                @Override
+                public void onImageFail() {
+
+                }
+            });
+        }
     }
 
     @Override

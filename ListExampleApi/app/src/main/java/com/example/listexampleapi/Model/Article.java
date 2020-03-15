@@ -2,6 +2,10 @@ package com.example.listexampleapi.Model;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class Article {
     private String id;
     private String title;
@@ -17,9 +21,39 @@ public class Article {
     private String imageUrl;
     private Bitmap image;
 
+
+
+    private List<String> urlImages;
+    private List<Bitmap> images;
+
+    public List<Bitmap> getImages() {
+        return images;
+    }
+
+    public void addImage(Bitmap image){
+        this.images.add(image);
+    }
+
+    public void setImages(List<Bitmap> images) {
+        this.images = images;
+    }
+
+    public List<String> getUrlImages() {
+        return urlImages;
+    }
+
+    public void setUrlImages(List<String> urlImages) {
+        this.urlImages = urlImages;
+    }
+
+
+
+
     public Article(String id) {
         this.id = id;
         this.itemImage = null;
+        this.urlImages = new ArrayList<>();
+        this.images = new ArrayList<>();
     }
 
     public Article(String id, String title, String price, String urlItemImage) {
