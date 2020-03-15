@@ -21,6 +21,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Title"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ivImage"
         android:textStyle="bold"

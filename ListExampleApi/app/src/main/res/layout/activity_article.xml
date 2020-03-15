@@ -14,7 +14,7 @@
         <com.example.listexampleapi.View.ViewUtil.ResizableImageView
             android:id="@+id/imageArticle"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -68,7 +68,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/available_stock"
+                    android:text="@string/available_articles"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -81,7 +81,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sold_quantity"
+                    android:text="@string/sold_articles"
                     android:layout_marginLeft="20dp"
                     android:textStyle="bold"/>
 
@@ -133,7 +133,8 @@
         android:layout_marginTop="215dp"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true">
 
         <ImageView
             android:id="@+id/ivMoney"

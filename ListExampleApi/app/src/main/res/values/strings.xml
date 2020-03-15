@@ -11,4 +11,6 @@
     <string name="seller_address">Dirección del vendedor:</string>
     <string name="new_condition">Nuevo</string>
     <string name="used_condition">Usado</string>
+    <string name="sold_articles">Vendidos</string>
+    <string name="available_articles">Disponibles</string>
 </resources>
