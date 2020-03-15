@@ -15,4 +15,5 @@
     <string name="available_articles">Disponibles:</string>
     <string name="cant_find_bitmap_drawable">Can\'t find bitmap on given view/drawable</string>
     <string name="no_items_available">No hay articulos diponibles con busqueda:</string>
+    <string name="not_internet">UPS! No posee conexion a Internet</string>
 </resources>

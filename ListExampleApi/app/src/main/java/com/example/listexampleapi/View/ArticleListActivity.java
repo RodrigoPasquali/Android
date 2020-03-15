@@ -3,6 +3,8 @@ package com.example.listexampleapi.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -45,6 +47,21 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
         onSearchActionTouch();
     }
 
+    private boolean checkInternet(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        boolean connectionInternet = true;
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+            connectionInternet = true;
+        } else {
+            connectionInternet = false;
+        }
+
+        return connectionInternet;
+    }
+
     private void getLayoutViews() {
         this.listView = findViewById(R.id.listView);
         this.edSearch = findViewById(R.id.edSearch);
@@ -72,12 +89,19 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 boolean boolReturn = false;
 
-                if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if(keyCode == KeyEvent.KEYCODE_ENTER){
-                        generateListView();
-                        boolReturn = true;
+                if(checkInternet()) {
+                    if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                        if(keyCode == KeyEvent.KEYCODE_ENTER){
+                            generateListView();
+                            boolReturn = true;
+                        }
                     }
+                } else {
+                    Toast.makeText(ArticleListActivity.this,
+                            getResources().getString(R.string.not_internet),
+                            Toast.LENGTH_LONG).show();
                 }
+
                 return boolReturn;
             }
         });
@@ -85,7 +109,13 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
         this.btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                generateListView();
+                if(checkInternet()) {
+                    generateListView();
+                } else {
+                    Toast.makeText(ArticleListActivity.this,
+                            getResources().getString(R.string.not_internet),
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -94,11 +124,17 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Article item = adapter.getItem(position);
-                Intent intent = new Intent(ArticleListActivity.this, ArticleActivity.class);
-                intent.putExtra("id", item.getId());
+                if(checkInternet()) {
+                    Article item = adapter.getItem(position);
+                    Intent intent = new Intent(ArticleListActivity.this, ArticleActivity.class);
+                    intent.putExtra("id", item.getId());
 
-                startActivity(intent);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(ArticleListActivity.this,
+                            getResources().getString(R.string.not_internet),
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
