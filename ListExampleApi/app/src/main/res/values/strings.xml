@@ -4,4 +4,11 @@
     <string name="searcher">Buscando:</string>
     <string name="search">BUSCAR...</string>
     <string name="go_to_publication">IR A LA PUBLICACION</string>
+    <string name="conditon_two_point">Condicion:</string>
+    <string name="condition">Condition</string>
+    <string name="available_stock">Stock Disponible:</string>
+    <string name="sold_quantity">Cantidad vendida:</string>
+    <string name="seller_address">Dirección del vendedor:</string>
+    <string name="new_condition">Nuevo</string>
+    <string name="used_condition">Usado</string>
 </resources>

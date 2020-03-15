@@ -95,13 +95,9 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Article item = adapter.getItem(position);
-//                articleListPresenter.getArticleData(item);
                 Intent intent = new Intent(ArticleListActivity.this, ArticleActivity.class);
                 intent.putExtra("id", item.getId());
-//                intent.putExtra("title", item.getTitle());
-//                intent.putExtra("price", item.getPrice());
-//                intent.putExtra("image", item.getUrlImage());
-//                intent.putExtra("condition", item.getCondition());
+
                 startActivity(intent);
             }
         });

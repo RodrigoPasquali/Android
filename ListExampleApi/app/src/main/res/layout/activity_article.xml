@@ -41,12 +41,24 @@
                 android:textStyle="bold"
                 android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/tvCondition"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Condition"
-                android:layout_marginTop="5dp"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/conditon_two_point"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvCondition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/condition" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,20 +68,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stock Available:"
+                    android:text="@string/available_stock"
                     android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/tvAvailableQuantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="xxx"
+                    android:text="-"
                     android:layout_marginLeft="5dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sold Quantity:"
+                    android:text="@string/sold_quantity"
                     android:layout_marginLeft="20dp"
                     android:textStyle="bold"/>
 
@@ -77,7 +89,7 @@
                     android:id="@+id/tvSoldQuantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="---"
+                    android:text="-"
                     android:layout_marginLeft="5dp"/>
             </LinearLayout>
 
@@ -90,7 +102,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seller Addres:"
+                    android:text="@string/seller_address"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvSellerAddress"

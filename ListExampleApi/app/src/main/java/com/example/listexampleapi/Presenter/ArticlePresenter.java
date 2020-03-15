@@ -17,13 +17,11 @@ import org.json.JSONObject;
 public class ArticlePresenter implements ArticlePresenterInterface {
     private RequestService requestService;
     private ListArticleParse listArticleParse;
-    private Context context;
 
     private ArticleView view;
     private Article article;
 
     public ArticlePresenter(Context context, ArticleView view) {
-        this.context = context;
         this.requestService = RequestService.getInstance(context);
         this.listArticleParse = new ListArticleParse();
         this.view = view;

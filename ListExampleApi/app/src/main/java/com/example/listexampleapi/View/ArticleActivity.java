@@ -55,7 +55,22 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
     public void showResult(Article pArticle) {
         this.tvTitle.setText(pArticle.getTitle());
         this.tvPrice.setText(pArticle.getPrice());
-        this.tvCondition.setText(pArticle.getCondition());
+
+        switch (pArticle.getCondition()){
+            case "new":
+                this.tvCondition.setText(getResources().getString(R.string.new_condition));
+
+                break;
+
+            case "used":
+                this.tvCondition.setText(getResources().getString(R.string.used_condition));
+
+                break;
+
+            default:
+                this.tvCondition.setText("-");
+                break;
+        }
         this.tvAvailableQuantity.setText(pArticle.getAvailableQuantity());
         this.tvSoldQuantity.setText(pArticle.getSoldQuantity());
 //        this.tvSellerAddress.setText(pArticle.);
