@@ -82,6 +82,10 @@ public class ListArticleParse {
             article.setLinkToPublication(jsonObject.getString("permalink"));
         }
 
+        if (jsonObject.has("accepts_mercadopago")) {
+            article.setMercadoPagoAccept(jsonObject.getString("accepts_mercadopago"));
+        }
+
         try {
             jsonArray = jsonObject.getJSONArray("pictures");
 

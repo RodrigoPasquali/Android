@@ -17,9 +17,12 @@ public class Article {
     private String imageUrl;
     private Bitmap image;
 
+    private boolean mercadoPagoAccept;
+
     public Article(String id) {
         this.id = id;
         this.itemImage = null;
+        this.mercadoPagoAccept = false;
     }
 
     public Article(String id, String title, String price, String urlItemImage) {
@@ -27,6 +30,7 @@ public class Article {
         this.title = title;
         this.price = price;
         this.setUrlItemImage(urlItemImage);
+        this.mercadoPagoAccept = false;
     }
 
     public String getId() {
@@ -132,6 +136,17 @@ public class Article {
     public void setImage(Bitmap image) {
         this.image = image;
     }
+
+    public boolean isMercadoPagoAccept() {
+        return mercadoPagoAccept;
+    }
+
+    public void setMercadoPagoAccept(String mercadoPagoAccept) {
+        if(mercadoPagoAccept.equals("true")) {
+            this.mercadoPagoAccept = true;
+        }
+    }
+
     private String checkUrl(String url){
         // Se agrega una s para formar "https", ya que las imagenes son "http"
         if(!(url.substring(4,5).equals("s"))){

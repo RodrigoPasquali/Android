@@ -27,9 +27,10 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
     private TextView tvCondition;
     private TextView tvAvailableQuantity;
     private TextView tvSoldQuantity;
-//    private TextView tvSellerAddress;
     private ImageView image;
     private Button btnLink;
+    private ImageView ivMercadoPago;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +59,8 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
         this.image = findViewById(R.id.imageArticle);
         this.tvAvailableQuantity = findViewById(R.id.tvAvailableQuantity);
         this.tvSoldQuantity = findViewById(R.id.tvSoldQuantity);
-//        this.tvSellerAddress = findViewById(R.id.tvSellerAddress);
         this.btnLink = findViewById(R.id.btnLink);
+        this.ivMercadoPago = findViewById(R.id.ivMercadoPago);
     }
 
     private int getWidthDisplaySizes(){
@@ -104,7 +105,6 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
         }
         this.tvAvailableQuantity.setText(pArticle.getAvailableQuantity());
         this.tvSoldQuantity.setText(pArticle.getSoldQuantity());
-//        this.tvSellerAddress.setText(pArticle.);
 
         if(pArticle.getImage() == null){
             image.setImageBitmap(BitmapFactory.decodeResource(getApplicationContext().getResources(),
@@ -114,6 +114,12 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
 
             int width = getWidthDisplaySizes();
             this.imageViewRisizer.scaleImage(image, width);
+        }
+
+        if(pArticle.isMercadoPagoAccept()){
+            ivMercadoPago.setImageResource(R.drawable.accept);
+        } else {
+            ivMercadoPago.setImageResource(R.drawable.not_accept);
         }
 
         btnLinkAction(pArticle.getLinkToPublication());
