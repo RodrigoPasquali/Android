@@ -1,4 +1,4 @@
-package com.example.listexampleapi.Services;
+package com.example.listexampleapi.Service;
 
 import android.graphics.Bitmap;
 

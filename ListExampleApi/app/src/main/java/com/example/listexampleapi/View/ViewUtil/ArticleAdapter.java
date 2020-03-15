@@ -1,9 +1,7 @@
-package com.example.listexampleapi.View.ViewUtils;
+package com.example.listexampleapi.View.ViewUtil;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.listexampleapi.Model.Article;
 import com.example.listexampleapi.R;
+import com.example.listexampleapi.View.Interface.ArticleListView;
 
 import java.util.List;
 
-public class ArticleAdapter extends ArrayAdapter {
+public class ArticleAdapter extends ArrayAdapter implements ArticleListView {
     private RequestQueue requestQueue;
     private static final String TAG = "ArticleAdapter";
     private List<Article> items;
@@ -31,11 +27,11 @@ public class ArticleAdapter extends ArrayAdapter {
         super(context,0);
 
         this.context = context;
-        requestQueue= Volley.newRequestQueue(context);
+        this.requestQueue= Volley.newRequestQueue(context);
     }
 
     public void setItems(List<Article> list){
-        items = list;
+        this.items = list;
         notifyDataSetChanged();
     }
 
@@ -66,13 +62,23 @@ public class ArticleAdapter extends ArrayAdapter {
         tvTitle.setText(item.getTitle());
         tvPrice.setText(item.getPrice());
 
-        if(item.getImage() == null){
+        if(item.getItemImage() == null){
             imageArticle.setImageBitmap(BitmapFactory.decodeResource(this.context.getResources(),
                     R.drawable.error));
         } else {
-            imageArticle.setImageBitmap(item.getImage());
+            imageArticle.setImageBitmap(item.getItemImage());
         }
 
         return listItemView;
+    }
+
+    @Override
+    public void showResult(List<Article> articleList) {
+
+    }
+
+    @Override
+    public void invalidOperation() {
+
     }
 }

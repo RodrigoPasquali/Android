@@ -90,7 +90,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Seller Addres:"
-                    android:layout_marginLeft="5dp"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/tvSellerAddress"
@@ -160,7 +159,7 @@
         android:layout_marginLeft="65dp"
         android:layout_marginRight="65dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/go_to_page"
+        android:text="@string/go_to_publication"
         android:textSize="20sp"
         android:background="@drawable/button_outline"/>
 </RelativeLayout>

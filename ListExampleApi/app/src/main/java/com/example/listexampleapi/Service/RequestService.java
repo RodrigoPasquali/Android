@@ -1,4 +1,4 @@
-package com.example.listexampleapi.Services;
+package com.example.listexampleapi.Service;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -38,8 +38,8 @@ public class RequestService {
         return instance;
     }
 
-    public void getSearchArticles(String article, final ListVolleyCallback callback){
-        jsArrayRequest = new JsonObjectRequest(Request.Method.GET, URL_BASE + URL_JSON + article, null,
+    public void getSearchArticles(String article, final JsonVolleyCallback callback){
+        this.jsArrayRequest = new JsonObjectRequest(Request.Method.GET, URL_BASE + URL_JSON + article, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -72,11 +72,11 @@ public class RequestService {
                 }
         );
 
-        requestQueue.add(jsArrayRequest);
+        this.requestQueue.add(jsArrayRequest);
     }
 
-    public void getArticle(String id, final ListVolleyCallback callback){
-        jsArrayRequest = new JsonObjectRequest(Request.Method.GET, URL_BASE + URL_ARTICLE + id, null,
+    public void getArticle(String id, final JsonVolleyCallback callback){
+        this.jsArrayRequest = new JsonObjectRequest(Request.Method.GET, URL_BASE + URL_ARTICLE + id, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -109,11 +109,7 @@ public class RequestService {
                 }
         );
 
-        requestQueue.add(jsArrayRequest);
-    }
-
-    public void getDescription(){
-
+        this.requestQueue.add(jsArrayRequest);
     }
 
     public void getImage(final Article article, String imageUrl, final ImageVolleyCallback imageVolleyCallback) {
@@ -121,7 +117,6 @@ public class RequestService {
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {
-//                        article.setImage(bitmap);
                         imageVolleyCallback.onImageSuccess(bitmap);
 
                         // imagenPost.setImageBitmap(bitmap);
@@ -130,12 +125,11 @@ public class RequestService {
                 new Response.ErrorListener() {
                     public void onErrorResponse(VolleyError error) {
                         imageVolleyCallback.onImageFail();
-//                        imagenPost.setImageResource(R.drawable.error);
                         Log.d(TAG, "Error en respuesta Bitmap: "+ error.getMessage());
                     }
                 }
         );
 
-        requestQueue.add(request);
+        this.requestQueue.add(request);
     }
 }

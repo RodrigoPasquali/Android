@@ -3,5 +3,5 @@
     <string name="please_enter_article_searched">Por favor introducir articulo a buscar</string>
     <string name="searcher">Buscando:</string>
     <string name="search">BUSCAR...</string>
-    <string name="go_to_page">IR A LA PAGINA</string>
+    <string name="go_to_publication">IR A LA PUBLICACION</string>
 </resources>
