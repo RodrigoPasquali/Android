@@ -2,9 +2,13 @@ package com.example.listexampleapi.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +29,7 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
     private TextView tvSoldQuantity;
 //    private TextView tvSellerAddress;
     private ImageView image;
+    private Button btnLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +59,27 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
         this.tvAvailableQuantity = findViewById(R.id.tvAvailableQuantity);
         this.tvSoldQuantity = findViewById(R.id.tvSoldQuantity);
 //        this.tvSellerAddress = findViewById(R.id.tvSellerAddress);
+        this.btnLink = findViewById(R.id.btnLink);
     }
 
     private int getWidthDisplaySizes(){
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         return metrics.widthPixels;
+    }
+
+    private void btnLinkAction(final String url){
+        btnLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (url != null && !url.isEmpty()){
+                    Intent intentWeb = new Intent();
+                    intentWeb.setAction(Intent.ACTION_VIEW);
+                    intentWeb.setData(Uri.parse(url));
+                    startActivity(intentWeb);
+                }
+            }
+        });
     }
 
     @Override
@@ -95,6 +115,8 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
             int width = getWidthDisplaySizes();
             this.imageViewRisizer.scaleImage(image, width);
         }
+
+        btnLinkAction(pArticle.getLinkToPublication());
     }
 
     @Override
