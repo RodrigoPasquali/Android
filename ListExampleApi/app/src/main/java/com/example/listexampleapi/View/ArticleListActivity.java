@@ -105,14 +105,23 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
 
     @Override
     public void showResult(List<Article> articleList) {
-        this.adapter.setItems(articleList);
-        this.listView.setAdapter(this.adapter);
+        if(articleList.size() == 0){
+            adapter.clear();
+            adapter.setItems(null);
+            listView.setAdapter(null);
+            Toast.makeText(ArticleListActivity.this,
+                    getResources().getString(R.string.no_items_available) + " " + this.edSearch.getText(),
+                    Toast.LENGTH_LONG).show();
+        } else {
+            this.adapter.setItems(articleList);
+            this.listView.setAdapter(this.adapter);
+        }
     }
 
     @Override
     public void invalidOperation() {
         Toast.makeText(ArticleListActivity.this,
-                getResources().getString(R.string.searcher) + this.edSearch.getText(),
+                getResources().getString(R.string.searcher) + " " + this.edSearch.getText(),
                 Toast.LENGTH_LONG).show();
     }
 }
