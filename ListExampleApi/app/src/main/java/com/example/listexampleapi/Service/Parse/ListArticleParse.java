@@ -26,13 +26,13 @@ public class ListArticleParse {
 
             for(int i=0; i<jsonArray.length(); i++){
                 try {
-                    JSONObject objeto = jsonArray.getJSONObject(i);
+                    JSONObject object = jsonArray.getJSONObject(i);
 
                     Article article = new Article(
-                            objeto.getString("id"),
-                            objeto.getString("title"),
-                            objeto.getString("price"),
-                            objeto.getString("thumbnail"));
+                            object.getString("id"),
+                            object.getString("title"),
+                            object.getString("price"),
+                            object.getString("thumbnail"));
 
                     articles.add(article);
                 } catch (JSONException e) {
