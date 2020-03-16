@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MELISearcher</string>
+    <string name="app_name">MELI Searcher</string>
     <string name="available_articles">Available:</string>
     <string name="available_stock">Available stock:</string>
     <string name="cant_find_bitmap_drawable">Can\'t find bitmap on given view/drawable</string>
