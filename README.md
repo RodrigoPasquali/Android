@@ -7,9 +7,7 @@ CONSIGA
 
 1)Search: buscador de productos y listado de respuestas.
 
-2)Product Page: detalle de un producto (al cual se debería poder acceder al tappear uno
-
-                de los items en el resultado del search).
+2)Product Page: detalle de un producto (al cual se debería poder acceder al tappear uno de los items en el resultado del search).
 
 
 ENTREGA
