@@ -40,19 +40,12 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
         this.presenter = new ArticlePresenter(getApplicationContext(), this);
         this.imageViewRisizer = new ImageViewRisizer(getApplicationContext());
 
-        getViewLayouts();
+        getViewsLayout();
 
         getArticleSelected();
     }
 
-    private void getArticleSelected(){
-        Bundle extras = getIntent().getExtras();
-        String articleId = extras.getString("id");
-
-        this.presenter.getArticleData(articleId);
-    }
-
-    private void getViewLayouts(){
+    private void getViewsLayout(){
         this.tvTitle = findViewById(R.id.tvTitle);
         this.tvPrice = findViewById(R.id.tvPrice);
         this.tvCondition = findViewById(R.id.tvCondition);
@@ -61,6 +54,13 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
         this.tvSoldQuantity = findViewById(R.id.tvSoldQuantity);
         this.btnLink = findViewById(R.id.btnLink);
         this.ivMercadoPago = findViewById(R.id.ivMercadoPago);
+    }
+
+    private void getArticleSelected(){
+        Bundle extras = getIntent().getExtras();
+        String articleId = extras.getString("id");
+
+        this.presenter.getArticleData(articleId);
     }
 
     private int getWidthDisplaySizes(){

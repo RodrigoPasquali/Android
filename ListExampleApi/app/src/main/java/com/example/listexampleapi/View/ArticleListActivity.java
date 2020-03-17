@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,6 +29,8 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
     private ArticleAdapter adapter;
     private EditText edSearch;
     private ImageView btnSearch;
+    boolean doubleBackToExit = false;
+
 
     private ArticleListPresenterInterface presenter;
 
@@ -36,7 +39,7 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_list);
 
-        getLayoutViews();
+        getViewsLayout();
 
         this.adapter = new ArticleAdapter(this);
 
@@ -62,7 +65,7 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
         return connectionInternet;
     }
 
-    private void getLayoutViews() {
+    private void getViewsLayout() {
         this.listView = findViewById(R.id.listView);
         this.edSearch = findViewById(R.id.edSearch);
         this.btnSearch = findViewById(R.id.btnSearch);
@@ -137,6 +140,24 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExit) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExit = true;
+        Toast.makeText(this, getResources().getString(R.string.exit_app), Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExit = false;
+            }
+        }, 2000);
     }
 
     @Override
