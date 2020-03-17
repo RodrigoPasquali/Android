@@ -17,4 +17,5 @@
     <string name="sold_articles">Sold:</string>
     <string name="sold_quantity">"Quantity sold: "</string>
     <string name="used_condition">Used</string>
+    <string name="exit_app">Please click BACK again to exit</string>
 </resources>
