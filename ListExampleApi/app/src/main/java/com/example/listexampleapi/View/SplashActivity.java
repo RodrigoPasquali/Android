@@ -7,7 +7,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.listexampleapi.BuildConfig;
@@ -20,8 +19,6 @@ public class SplashActivity extends AppCompatActivity {
     private TextView tvVersion;
     private ConstraintLayout constraintLayout;
     private int timeOut = 3000;
-    private boolean isTouchedScreen = false;
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -31,13 +28,9 @@ public class SplashActivity extends AppCompatActivity {
 
         getViewsLayout();
 
-        tvVersion.setText(BuildConfig.VERSION_NAME);
+        tvVersion.setText("V" + BuildConfig.VERSION_NAME);
 
-        onScreenTouchAction();
-
-        if(isTouchedScreen) {
-            initTimeOut(timeOut);
-        }
+        initTimeOut(timeOut);
     }
 
     private void getViewsLayout() {
@@ -54,17 +47,5 @@ public class SplashActivity extends AppCompatActivity {
                 SplashActivity.this.finish();
             }
         }, time);
-    }
-
-    public void onScreenTouchAction(){
-        constraintLayout.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isTouchedScreen = true;
-                startActivity(new Intent(getApplicationContext(), ArticleListActivity.class));
-                SplashActivity.this.finish();
-
-            }
-        });
     }
 }
