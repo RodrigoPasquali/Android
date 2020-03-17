@@ -20,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
     private TextView tvVersion;
     private ConstraintLayout constraintLayout;
     private int timeOut = 3000;
+    private boolean isTouchedScreen = false;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -34,7 +35,9 @@ public class SplashActivity extends AppCompatActivity {
 
         onScreenTouchAction();
 
-        initTimeOut(timeOut);
+        if(isTouchedScreen) {
+            initTimeOut(timeOut);
+        }
     }
 
     private void getViewsLayout() {
@@ -57,6 +60,7 @@ public class SplashActivity extends AppCompatActivity {
         constraintLayout.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isTouchedScreen = true;
                 startActivity(new Intent(getApplicationContext(), ArticleListActivity.class));
                 SplashActivity.this.finish();
 
