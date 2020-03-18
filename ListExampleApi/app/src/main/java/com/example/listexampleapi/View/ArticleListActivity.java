@@ -1,6 +1,7 @@
 package com.example.listexampleapi.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,16 +9,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.listexampleapi.Model.Article;
@@ -53,6 +50,15 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
         onItemTouch();
 
         onSearchActionTouch();
+
+        initToolbar();
+    }
+
+    private void initToolbar(){
+        Toolbar toolbar = findViewById(R.id.action_bar);
+        if (toolbar!= null){
+            toolbar.setTitleTextColor(Color.BLACK);
+        }
     }
 
     private boolean checkInternet(){

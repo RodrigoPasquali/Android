@@ -1,9 +1,11 @@
 package com.example.listexampleapi.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -43,6 +45,15 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
         getViewsLayout();
 
         getArticleSelected();
+
+        initToolbar();
+    }
+
+    private void initToolbar(){
+        Toolbar toolbar = findViewById(R.id.action_bar);
+        if (toolbar!= null){
+            toolbar.setTitleTextColor(Color.BLACK);
+        }
     }
 
     private void getViewsLayout(){
