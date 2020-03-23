@@ -20,10 +20,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.listexampleapi.Model.Article;
 import com.example.listexampleapi.Presenter.ArticlePresenter;
 import com.example.listexampleapi.R;
+import com.example.listexampleapi.Utils.ConnectionChecker;
 import com.example.listexampleapi.View.Interface.ArticleView;
 import com.example.listexampleapi.View.ViewUtil.ImageViewRisizer;
 import com.google.android.material.navigation.NavigationView;
@@ -148,11 +150,17 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView,
         btnLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (url != null && !url.isEmpty()){
-                    Intent intentWeb = new Intent();
-                    intentWeb.setAction(Intent.ACTION_VIEW);
-                    intentWeb.setData(Uri.parse(url));
-                    startActivity(intentWeb);
+                if(ConnectionChecker.checkInternet(getApplicationContext())){
+                    if (url != null && !url.isEmpty()){
+                        Intent intentWeb = new Intent();
+                        intentWeb.setAction(Intent.ACTION_VIEW);
+                        intentWeb.setData(Uri.parse(url));
+                        startActivity(intentWeb);
+                    }
+                } else {
+                    Toast.makeText(ArticleActivity.this,
+                            getResources().getString(R.string.not_internet),
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });

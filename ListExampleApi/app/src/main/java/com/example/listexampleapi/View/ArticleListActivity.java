@@ -13,8 +13,6 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +29,7 @@ import com.example.listexampleapi.Model.Article;
 import com.example.listexampleapi.Presenter.ArticleListPresenter;
 import com.example.listexampleapi.Presenter.Interface.ArticleListPresenterInterface;
 import com.example.listexampleapi.R;
+import com.example.listexampleapi.Utils.ConnectionChecker;
 import com.example.listexampleapi.View.Interface.ArticleListView;
 import com.example.listexampleapi.View.ViewUtil.ArticleAdapter;
 import com.google.android.material.navigation.NavigationView;
@@ -134,27 +133,12 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
         });
     }
 
-    private boolean checkInternet(){
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-        boolean connectionInternet = true;
-
-        if (networkInfo != null && networkInfo.isConnected()) {
-            connectionInternet = true;
-        } else {
-            connectionInternet = false;
-        }
-
-        return connectionInternet;
-    }
-
     private void onSearchActionTouch(){
         this.edSearch.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 boolean boolReturn = false;
 
-                if(checkInternet()) {
+                if(ConnectionChecker.checkInternet(getApplicationContext())) {
                     if (event.getAction() == KeyEvent.ACTION_DOWN) {
                         if(keyCode == KeyEvent.KEYCODE_ENTER){
                             generateListView();
@@ -177,7 +161,7 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
             public void onClick(View v) {
                 animateSearchImage(500);
 
-                if(checkInternet()) {
+                if(ConnectionChecker.checkInternet(getApplicationContext())) {
                     generateListView();
                 } else {
                     Toast.makeText(ArticleListActivity.this,
@@ -209,7 +193,7 @@ public class ArticleListActivity extends AppCompatActivity implements ArticleLis
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(checkInternet()) {
+                if(ConnectionChecker.checkInternet(getApplicationContext())) {
                     Article item = adapter.getItem(position);
                     Intent intent = new Intent(ArticleListActivity.this, ArticleActivity.class);
                     intent.putExtra("id", item.getId());
