@@ -17,4 +17,8 @@
     <string name="no_items_available">No hay articulos diponibles con busqueda:</string>
     <string name="not_internet">UPS! Parece que no tienes conexion a internet</string>
     <string name="exit_app">Por favor presione ATRAS nuevamente para cerrar la app</string>
+    <string name="about">Acerca de ...</string>
+    <string name="exit">Salir</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
 </resources>

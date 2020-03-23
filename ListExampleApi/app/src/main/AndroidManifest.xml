@@ -22,12 +22,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/AppTheme"
+            android:theme="@style/Theme.Design.NoActionBar"
             android:name=".View.ArticleActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:theme="@style/AppTheme"
+            android:theme="@style/Theme.Design.NoActionBar"
             android:name=".View.ArticleListActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">

@@ -1,14 +1,21 @@
 package com.example.listexampleapi.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,8 +26,11 @@ import com.example.listexampleapi.Presenter.ArticlePresenter;
 import com.example.listexampleapi.R;
 import com.example.listexampleapi.View.Interface.ArticleView;
 import com.example.listexampleapi.View.ViewUtil.ImageViewRisizer;
+import com.google.android.material.navigation.NavigationView;
 
-public class ArticleActivity extends AppCompatActivity implements ArticleView {
+public class ArticleActivity extends AppCompatActivity implements ArticleView,
+        NavigationView.OnNavigationItemSelectedListener,
+        DrawerLayout.DrawerListener{
     private ArticlePresenter presenter;
     private ImageViewRisizer imageViewRisizer;
 
@@ -32,8 +42,12 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
     private ImageView image;
     private Button btnLink;
     private ImageView ivMercadoPago;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private ImageView ivMenu;
+    private NavigationView navigationView;
 
-
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,13 +61,10 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
         getArticleSelected();
 
         initToolbar();
-    }
 
-    private void initToolbar(){
-        Toolbar toolbar = findViewById(R.id.action_bar);
-        if (toolbar!= null){
-            toolbar.setTitleTextColor(Color.BLACK);
-        }
+        onMenuItemClick();
+
+        initNavigationView();
     }
 
     private void getViewsLayout(){
@@ -65,6 +76,59 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
         this.tvSoldQuantity = findViewById(R.id.tvSoldQuantity);
         this.btnLink = findViewById(R.id.btnLink);
         this.ivMercadoPago = findViewById(R.id.ivMercadoPago);
+        this.ivMenu = findViewById(R.id.ivMenu);
+        this.toolbar = findViewById(R.id.action_bar);
+        this.drawerLayout = findViewById(R.id.drawer_layout);
+        this.navigationView = findViewById(R.id.nav_view);
+    }
+
+    private void initToolbar(){
+        Toolbar toolbar = findViewById(R.id.action_bar);
+        if (toolbar!= null){
+            toolbar.setTitleTextColor(Color.BLACK);
+        }
+    }
+
+    private void initNavigationView(){
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        drawerLayout.addDrawerListener(this);
+    }
+
+    private void onMenuItemClick() {
+        ivMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.END); //Edit Gravity.START need API 14
+            }
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.about: {
+                Intent intent = new Intent(ArticleActivity.this, SplashActivity.class);
+
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                break;
+            }
+
+            case R.id.exit: {
+                finishAffinity();
+            }
+
+            default:
+                break;
+        }
+
+        return true;
     }
 
     private void getArticleSelected(){
@@ -92,6 +156,16 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            drawerLayout.closeDrawer(GravityCompat.END);
+        } else {
+            super.onBackPressed();
+            overridePendingTransition(0, 0);
+        }
     }
 
     @Override
@@ -138,6 +212,26 @@ public class ArticleActivity extends AppCompatActivity implements ArticleView {
 
     @Override
     public void invalidOperation() {
+
+    }
+
+    @Override
+    public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+    }
+
+    @Override
+    public void onDrawerOpened(@NonNull View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerClosed(@NonNull View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
 
     }
 }

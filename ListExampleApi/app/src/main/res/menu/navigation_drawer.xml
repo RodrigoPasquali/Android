@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single"
+           android:id="@+id/about_group">
+        <item android:id="@+id/about" android:icon="@drawable/about_icon" android:title="@string/about"/>
+    </group>
+
+    <group android:checkableBehavior="single"
+           android:id="@+id/exit_group">
+        <item android:id="@+id/exit" android:icon="@drawable/ic_exit_to_app_black_24dp" android:title="@string/exit" />
+    </group>
+</menu>
