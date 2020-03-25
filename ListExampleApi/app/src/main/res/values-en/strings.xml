@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MELI Searcher</string>
+    <string name="available_articles">Available:</string>
+    <string name="available_stock">Available stock:</string>
+    <string name="cant_find_bitmap_drawable">Can\'t find bitmap on given view/drawable</string>
+    <string name="condition">Condition</string>
+    <string name="conditon_two_point">Condition:</string>
+    <string name="go_to_publication">GO TO PUBLICATION</string>
+    <string name="new_condition">New</string>
+    <string name="no_items_available">There are no articles available with search:</string>
+    <string name="not_internet">"UPS! It seems you have no internet connection "</string>
+    <string name="please_enter_article_searched">"Please enter article to search "</string>
+    <string name="search">SEARCH...</string>
+    <string name="searcher">Searching</string>
+    <string name="seller_address">Seller location:</string>
+    <string name="sold_articles">Sold:</string>
+    <string name="sold_quantity">"Quantity sold: "</string>
+    <string name="used_condition">Used</string>
+    <string name="exit_app">Please click BACK again to exit</string>
+</resources>

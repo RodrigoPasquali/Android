@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">MELI Searcher</string>
+    <string name="please_enter_article_searched">Por favor introducir articulo a buscar</string>
+    <string name="searcher">Buscando:</string>
+    <string name="search">BUSCAR...</string>
+    <string name="go_to_publication">IR A LA PUBLICACION</string>
+    <string name="conditon_two_point">Condicion:</string>
+    <string name="condition">Condicion</string>
+    <string name="available_stock">Stock Disponible:</string>
+    <string name="sold_quantity">Cantidad vendida:</string>
+    <string name="seller_address">Dirección del vendedor:</string>
+    <string name="new_condition">Nuevo</string>
+    <string name="used_condition">Usado</string>
+    <string name="sold_articles">Vendidos:</string>
+    <string name="available_articles">Disponibles:</string>
+    <string name="cant_find_bitmap_drawable">"No se puede encontrar bitmap en una vista dada/ drawable  "</string>
+    <string name="no_items_available">No hay articulos diponibles con busqueda:</string>
+    <string name="not_internet">UPS! Parece que no tienes conexion a internet</string>
+    <string name="exit_app">Por favor presione ATRAS nuevamente para cerrar la app</string>
+</resources>
