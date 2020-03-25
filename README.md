@@ -25,7 +25,7 @@
   presentados en forma de lista, en caso contrario mostrara un mensaje indicando que no es posible. Cada item de dicha lista cuenta con :
 
 	- Título de producto
-
+ 
 	- Precio del producto
 
 	- Imagen del producto
