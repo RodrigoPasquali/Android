@@ -1,6 +1,7 @@
 #  **MELISearcher**
 ##### (by Rodrigo Pasquali)
 ---
+
 ### CONSIGA
 
 -Desarrollar una app que utilice las APIs de Mercadolibre, con dos secciones:
@@ -9,9 +10,12 @@
 
 2. Product Page: detalle de un producto (al cual se debería poder acceder al tappear uno de los items en el resultado del search).
 
+
 ### OBJETIVO
 
 -Como objetivo principal del proyecto, se busco lograr cumplir con las consignas, dando una buena estructura al código.
+
+
 ### ENTREGA
 
 -Se logró cumplir con los requisitos básicos solicitados(puntos 1 y 2 de consignas).
@@ -66,9 +70,12 @@ En dicha vista se podrá visualizar:
 
 -SplashScreen
 
+
 ### FALTANTE
 
 -Cantidad de test pobre o casi nula, debería hacerse muchos mas test, pero el esfuerzo fue puesto en aplicar nuevos conocimientos y sumar funcionalidades.
+
+-Integracion continua.
 
 -Diagramas de clase, flujo y actividad.
 
