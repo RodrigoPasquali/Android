@@ -59,3 +59,45 @@ En dicha vista se podrá visualizar:
 -Uso de librería Volley para llevar a cabo las peticiones a la API.
 
 -Idioma Ingles y Español.
+
+-Icono personalizado.
+
+-Menu desde la derecha(navigation drawer). El mismo cuenta con 2 items :
+
+ - "About": lleva a la vista con la version del codigo.
+
+ - "Exit": Sale de la app.
+
+-SplashScreen
+
+
+### FALTANTE
+
+-Cantidad de test pobre o casi nula, debería hacerse muchos mas test, pero el esfuerzo fue puesto en aplicar nuevos conocimientos y sumar funcionalidades.
+
+-Integracion continua.
+
+-Diagramas de clase, flujo y actividad.
+
+-Comentarios en código.
+
+
+### POSIBLES FEATURES
+
+-Agregar botones para poder realizar filtros en las búsquedas(como por precio máximo).
+
+-Agregar "Paginas" para los artículos que se pueden traer desde "Mercado Libre", ya que actualmente es una sola pagina con 50 items.
+
+-Mejorar la experiencia de usuario(tanto con manejo de errores como visuales para indicar que esta "cargando").
+
+-Agregar la siguiente información en "Product Page" :
+
+  - Mas de una imagen en caso de poseerlas.
+
+  - Zoom a imágenes.
+
+  - Datos del vendedor(como ubicación, y la categoría del mismo).
+
+  - Preguntas al vendedor.
+
+  - Si el envió es gratis.
